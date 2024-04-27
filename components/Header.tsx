@@ -23,5 +23,7 @@ const styles = StyleSheet.create({
     paddingBottom: 2,
     borderBottomWidth: 1,
     borderBottomColor: "#E3E3E3",
+    position: "absolute",
+    zIndex: 50,
   },
 });
