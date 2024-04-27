@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
 import {
   createMaterialTopTabNavigator,
@@ -7,6 +7,9 @@ import {
 } from "@react-navigation/material-top-tabs";
 import { withLayoutContext } from "expo-router";
 import { ParamListBase, TabNavigationState } from "@react-navigation/native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { colors } from "../../constants/token";
+import Header from "../../components/Header";
 
 const { Navigator } = createMaterialTopTabNavigator();
 
@@ -18,7 +21,21 @@ export const MaterialTopTabs = withLayoutContext<
 >(Navigator);
 
 const Layout = () => {
-  return <MaterialTopTabs />;
+  return (
+    <SafeAreaProvider>
+      <View style={styles.container}>
+        <Header />
+        <MaterialTopTabs />
+      </View>
+    </SafeAreaProvider>
+  );
 };
 
 export default Layout;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.background_cream,
+  },
+});
