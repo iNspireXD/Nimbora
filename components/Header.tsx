@@ -2,14 +2,21 @@ import { View, Text, StyleSheet, Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import SearchBar from "./SearchBar";
 import { colors } from "../constants/token";
+import { Locations } from "../app/(tabs)/_layout";
 
-type Props = {};
+type Props = {
+  search: string;
+  locations: Locations[];
+  setSearch: (search: string) => void;
+  setLocations: (locations: Locations[]) => void;
+  submitLocation: (cityName: string) => void;
+};
 
 const Header = (props: Props) => {
   const insets = useSafeAreaInsets();
   return (
     <View style={[styles.container, { paddingTop: insets.top }]}>
-      <SearchBar />
+      <SearchBar {...props} />
     </View>
   );
 };

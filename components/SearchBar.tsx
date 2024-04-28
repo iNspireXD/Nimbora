@@ -8,25 +8,38 @@ import {
 import React, { useState } from "react";
 import { Feather, Entypo } from "@expo/vector-icons";
 import { colors } from "../constants/token";
+import { Locations } from "../app/(tabs)/_layout";
 
-type Props = {};
+type Props = {
+  search: string;
+  locations: Locations[];
+  setSearch: (search: string) => void;
+  setLocations: (locations: Locations[]) => void;
+  submitLocation: (cityName: string) => void;
+};
 
-const tempData = [
-  {
-    id: 1,
-    name: "London",
-    country: "United Kingdom",
-  },
-  {
-    id: 2,
-    name: "Kathmandu",
-    country: "Nepal",
-  },
-];
-const SearchBar = (props: Props) => {
-  const [locations, setLocations] = useState(tempData);
-  const [search, setSearch] = useState<string>("");
-  const [laoding, setLoading] = useState(false);
+// const tempData = [
+//   {
+//     id: 1,
+//     name: "London",
+//     country: "United Kingdom",
+//   },
+//   {
+//     id: 2,
+//     name: "Kathmandu",
+//     country: "Nepal",
+//   },
+// ];
+const SearchBar = ({
+  search,
+  setLocations,
+  setSearch,
+  locations,
+  submitLocation,
+}: Props) => {
+  // const [locations, setLocations] = useState(tempData);
+  // const [search, setSearch] = useState<string>("");
+  // const [laoding, setLoading] = useState(false);
 
   return (
     <View>
@@ -48,7 +61,7 @@ const SearchBar = (props: Props) => {
               <TouchableOpacity
                 key={location.id}
                 style={styles.locationContainer}
-                onPress={() => {}}
+                onPress={() => submitLocation(location.name)}
               >
                 <Entypo name="location-pin" size={24} color="black" />
                 <Text>{`${location.name}, ${location.country}.`}</Text>
