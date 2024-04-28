@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { colors, fontSize } from "../../constants/token";
 import { useRoute, RouteProp } from "@react-navigation/native";
 import { RootStackParamList } from "../../types/types";
-import { useFocusEffect } from "expo-router";
 
 type HomeScreenRouteProp = RouteProp<RootStackParamList, "locationData">;
 const months = [
@@ -55,13 +54,29 @@ const Home = () => {
         }}
       >
         <View style={{ flexDirection: "column" }}>
-          <Text>{`${day}, ${date} ${month}`}</Text>
-          <Text style={{ fontSize: 32, color: colors.background_dark }}>
+          <Text
+            style={{ fontFamily: "GlacialIndifference" }}
+          >{`${day}, ${date} ${month}`}</Text>
+          <Text
+            style={{
+              fontSize: 32,
+              color: colors.background_dark,
+              fontFamily: "Maiandra",
+            }}
+          >
             {route.params?.location.name}
           </Text>
-          <Text>{route.params?.location.country}</Text>
+          <Text style={{ fontFamily: "GlacialIndifference" }}>
+            {route.params?.location.country}
+          </Text>
         </View>
-        <Text style={{ transform: [{ rotate: "90deg" }], fontSize: 32 }}>
+        <Text
+          style={{
+            transform: [{ rotate: "90deg" }],
+            fontSize: 30,
+            fontFamily: "Maiandra",
+          }}
+        >
           {route.params?.current.condition.text}
         </Text>
       </View>
