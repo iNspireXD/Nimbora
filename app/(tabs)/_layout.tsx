@@ -31,20 +31,20 @@ const Layout = () => {
   const [locations, setLocations] = useState<Locations[]>([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
-  const [searchLocationName, setSearchLocationName] = useState("");
+  const [searchLocationName, setSearchLocationName] = useState("New Zealand");
 
   const debouncedSearch = useDebounce(search, 500);
 
   const locationSubmitHandler = (cityName: string): void => {
+    setSearch("");
     setSearchLocationName(cityName);
-    console.log(cityName);
   };
 
   const weatherDataCtx = useContext(WeatherContext);
 
   useEffect(() => {
     async function fetchForecastData() {
-      if (searchLocationName !== "") {
+      if (searchLocationName) {
         weatherDataCtx?.setFetching(true);
         weatherDataCtx?.setLocationData([]);
         try {

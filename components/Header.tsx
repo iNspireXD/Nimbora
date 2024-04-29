@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import SearchBar from "./SearchBar";
 import { colors } from "../constants/token";
-import { Locations } from "../app/(tabs)/_layout";
+import { Locations } from "../types/types";
 
 type Props = {
   search: string;

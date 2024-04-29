@@ -8,7 +8,7 @@ import {
 import React, { useState } from "react";
 import { Feather, Entypo } from "@expo/vector-icons";
 import { colors } from "../constants/token";
-import { Locations } from "../app/(tabs)/_layout";
+import { Locations } from "../types/types";
 
 type Props = {
   search: string;
@@ -18,18 +18,6 @@ type Props = {
   submitLocation: (cityName: string) => void;
 };
 
-// const tempData = [
-//   {
-//     id: 1,
-//     name: "London",
-//     country: "United Kingdom",
-//   },
-//   {
-//     id: 2,
-//     name: "Kathmandu",
-//     country: "Nepal",
-//   },
-// ];
 const SearchBar = ({
   search,
   setLocations,
@@ -37,10 +25,6 @@ const SearchBar = ({
   locations,
   submitLocation,
 }: Props) => {
-  // const [locations, setLocations] = useState(tempData);
-  // const [search, setSearch] = useState<string>("");
-  // const [laoding, setLoading] = useState(false);
-
   return (
     <View>
       <View style={styles.searchContainer}>

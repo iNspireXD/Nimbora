@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Dimensions } from "react-native";
+import { StyleSheet, Text, View, Dimensions, ScrollView } from "react-native";
 import { colors, fontSize } from "../../constants/token";
 import { WeatherData } from "../../types/types";
 import { useContext } from "react";
@@ -36,17 +36,19 @@ const Home = () => {
 
   const weatherForecast: WeatherData =
     weatherDataCtx?.locationData as WeatherData;
-
-  const [fulldate, time] = weatherForecast.location.localtime.split("");
-
+  const dateTimeString = weatherForecast.location?.localtime;
+  let fulldate: string = "";
+  if (dateTimeString) {
+    [fulldate] = dateTimeString.split(" ");
+  }
   const d = new Date(fulldate);
   let day = days[d.getDay()];
   let month = months[d.getMonth()];
   let date = d.getDate();
 
   return (
-    <View
-      style={{
+    <ScrollView
+      contentContainerStyle={{
         backgroundColor: colors.background_cream,
         flex: 1,
         justifyContent: "space-between",
@@ -73,10 +75,10 @@ const Home = () => {
               fontFamily: "MaiandraSD",
             }}
           >
-            {weatherForecast.location.name}
+            {weatherForecast?.location?.name}
           </Text>
           <Text style={{ fontFamily: "GlacialIndifference" }}>
-            {weatherForecast.location.country}
+            {weatherForecast?.location?.country}
           </Text>
         </View>
         <Text
@@ -86,7 +88,7 @@ const Home = () => {
             fontFamily: "MaiandraSD",
           }}
         >
-          {weatherForecast.current.condition.text}
+          {weatherForecast?.current?.condition.text}
         </Text>
       </View>
 
@@ -117,13 +119,13 @@ const Home = () => {
         }}
       >
         <Text style={styles.tempText}>
-          {weatherForecast.current.feelslike_c}
+          {weatherForecast.current?.feelslike_c}
         </Text>
         <Text style={{ marginTop: 6, fontSize: 18, fontFamily: "MaiandraSD" }}>
           °C
         </Text>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
