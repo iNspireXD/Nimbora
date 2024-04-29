@@ -1,12 +1,17 @@
 import { Stack } from "expo-router";
 import WeatherContexProvider from "../store/context/weather-context";
+
 import { useFonts } from "expo-font";
+import { ActivityIndicator } from "react-native";
 
 const Layout = () => {
-  const [fontsLoaded] = useFonts({
-    "GlacialIndifference": require("../assets/fonts/GlacialIndifference.otf"),
-    "MaiandraSD": require('../assets/fonts/Maiandra.otf')
+  let [fontsLoaded] = useFonts({
+    GlacialIndifference: require("../assets/fonts/GlacialIndifference.otf"),
+    MaiandraSD: require("../assets/fonts/Maiandra.otf"),
   });
+  if (!fontsLoaded) {
+    return <ActivityIndicator />;
+  }
   return (
     <WeatherContexProvider>
       <Stack screenOptions={{ headerShown: false }}>

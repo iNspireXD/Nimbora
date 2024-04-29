@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, Dimensions, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
 import { colors, fontSize } from "../../constants/token";
 import { WeatherData } from "../../types/types";
 import { useContext } from "react";
@@ -49,90 +56,103 @@ const Home = () => {
 
   return (
     <ScrollView
-      contentContainerStyle={{
-        backgroundColor: colors.background_cream,
-        flex: 1,
-        justifyContent: "space-between",
-        padding: 6,
-      }}
+      contentContainerStyle={
+        weatherDataCtx?.fetching
+          ? {
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: colors.background_cream,
+            }
+          : {
+              backgroundColor: colors.background_cream,
+              flex: 1,
+              justifyContent: "space-between",
+              padding: 6,
+            }
+      }
     >
-      {/* details part */}
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          marginLeft: 10,
-          marginTop: 24,
-        }}
-      >
-        <View style={{ flexDirection: "column" }}>
-          <Text
-            style={{ fontFamily: "GlacialIndifference" }}
-          >{`${day}, ${date} ${month}`}</Text>
-          <Text
+      {weatherDataCtx?.fetching ? (
+        <ActivityIndicator size="large" />
+      ) : (
+        <>
+          <View
             style={{
-              fontSize: 32,
-              color: colors.background_dark,
-              fontFamily: "MaiandraSD",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginLeft: 10,
+              marginTop: 24,
             }}
           >
-            {weatherForecast?.location?.name}
-          </Text>
-          <Text style={{ fontFamily: "GlacialIndifference" }}>
-            {weatherForecast?.location?.country}
-          </Text>
-        </View>
-      </View>
+            <View style={{ flexDirection: "column" }}>
+              <Text
+                style={{ fontFamily: "GlacialIndifference" }}
+              >{`${day}, ${date} ${month}`}</Text>
+              <Text
+                style={{
+                  fontSize: 32,
+                  color: colors.background_dark,
+                  fontFamily: "MaiandraSD",
+                }}
+              >
+                {weatherForecast?.location?.name}
+              </Text>
+              <Text style={{ fontFamily: "GlacialIndifference" }}>
+                {weatherForecast?.location?.country}
+              </Text>
+            </View>
+          </View>
 
-      {/* lottie View */}
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <LottieView
-          autoPlay
-          style={{
-            width: width * 0.95,
-            height: width * 0.95,
-          }}
-          source={
-            weatherForecast?.current?.condition.text
-              ? weatherIcons[
-                  weatherForecast.current.condition
-                    .text as keyof typeof weatherIcons
-                ]
-              : require("../../assets/anim/cloudy.json")
-          }
-        />
-        <Text
-          style={{
-            // transform: [{ rotate: "90deg" }],
-            fontSize: 30,
-            fontFamily: "MaiandraSD",
-          }}
-        >
-          {weatherForecast?.current?.condition.text}
-        </Text>
-      </View>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <LottieView
+              autoPlay
+              style={{
+                width: width * 0.95,
+                height: width * 0.95,
+              }}
+              source={
+                weatherForecast?.current?.condition.text
+                  ? weatherIcons[
+                      weatherForecast.current.condition
+                        .text as keyof typeof weatherIcons
+                    ]
+                  : require("../../assets/anim/cloudy.json")
+              }
+            />
+            <Text
+              style={{
+                fontSize: 30,
+                fontFamily: "MaiandraSD",
+              }}
+            >
+              {weatherForecast?.current?.condition.text}
+            </Text>
+          </View>
 
-      {/* temp */}
-      <View
-        style={{
-          left: 0,
-          bottom: 0,
-          flexDirection: "row",
-        }}
-      >
-        <Text style={styles.tempText}>
-          {weatherForecast.current?.feelslike_c}
-        </Text>
-        <Text style={{ marginTop: 6, fontSize: 18, fontFamily: "MaiandraSD" }}>
-          °C
-        </Text>
-      </View>
+          <View
+            style={{
+              left: 0,
+              bottom: 0,
+              flexDirection: "row",
+            }}
+          >
+            <Text style={styles.tempText}>
+              {weatherForecast.current?.feelslike_c}
+            </Text>
+            <Text
+              style={{ marginTop: 6, fontSize: 18, fontFamily: "MaiandraSD" }}
+            >
+              °C
+            </Text>
+          </View>
+        </>
+      )}
     </ScrollView>
   );
 };
