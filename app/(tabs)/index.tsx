@@ -4,6 +4,7 @@ import { WeatherData } from "../../types/types";
 import { useContext } from "react";
 import { WeatherContext } from "../../store/context/weather-context";
 import LottieView from "lottie-react-native";
+import { weatherIcons } from "../../constants/icon";
 
 const months = [
   "Jan",
@@ -61,7 +62,7 @@ const Home = () => {
           flexDirection: "row",
           justifyContent: "space-between",
           marginLeft: 10,
-          marginVertical: 24,
+          marginTop: 24,
         }}
       >
         <View style={{ flexDirection: "column" }}>
@@ -81,15 +82,6 @@ const Home = () => {
             {weatherForecast?.location?.country}
           </Text>
         </View>
-        <Text
-          style={{
-            transform: [{ rotate: "90deg" }],
-            fontSize: 30,
-            fontFamily: "MaiandraSD",
-          }}
-        >
-          {weatherForecast?.current?.condition.text}
-        </Text>
       </View>
 
       {/* lottie View */}
@@ -106,8 +98,24 @@ const Home = () => {
             width: width * 0.95,
             height: width * 0.95,
           }}
-          source={require("../../assets/anim/sunny.json")}
+          source={
+            weatherForecast?.current?.condition.text
+              ? weatherIcons[
+                  weatherForecast.current.condition
+                    .text as keyof typeof weatherIcons
+                ]
+              : require("../../assets/anim/cloudy.json")
+          }
         />
+        <Text
+          style={{
+            // transform: [{ rotate: "90deg" }],
+            fontSize: 30,
+            fontFamily: "MaiandraSD",
+          }}
+        >
+          {weatherForecast?.current?.condition.text}
+        </Text>
       </View>
 
       {/* temp */}
@@ -137,6 +145,6 @@ const styles = StyleSheet.create({
     fontWeight: "normal",
     fontFamily: "GlacialIndifference",
     marginLeft: 10,
-    marginBottom: 12,
+    marginBottom: 24,
   },
 });
