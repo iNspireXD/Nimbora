@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Dimensions } from "react-native";
 import { colors, fontSize } from "../../constants/token";
 import { WeatherData } from "../../types/types";
 import { useContext } from "react";
 import { WeatherContext } from "../../store/context/weather-context";
+import LottieView from "lottie-react-native";
 
 const months = [
   "Jan",
@@ -28,6 +29,8 @@ const days = [
   "Saturday",
 ];
 
+const { height, width } = Dimensions.get("screen");
+
 const Home = () => {
   const weatherDataCtx = useContext(WeatherContext);
 
@@ -46,13 +49,16 @@ const Home = () => {
       style={{
         backgroundColor: colors.background_cream,
         flex: 1,
+        justifyContent: "space-between",
+        padding: 6,
       }}
     >
+      {/* details part */}
       <View
         style={{
           flexDirection: "row",
           justifyContent: "space-between",
-          marginHorizontal: 24,
+          marginLeft: 10,
           marginVertical: 24,
         }}
       >
@@ -64,7 +70,7 @@ const Home = () => {
             style={{
               fontSize: 32,
               color: colors.background_dark,
-              fontFamily: "Maiandra",
+              fontFamily: "MaiandraSD",
             }}
           >
             {weatherForecast.location.name}
@@ -77,10 +83,44 @@ const Home = () => {
           style={{
             transform: [{ rotate: "90deg" }],
             fontSize: 30,
-            fontFamily: "Maiandra",
+            fontFamily: "MaiandraSD",
           }}
         >
           {weatherForecast.current.condition.text}
+        </Text>
+      </View>
+
+      {/* lottie View */}
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <LottieView
+          autoPlay
+          style={{
+            width: width * 0.95,
+            height: width * 0.95,
+          }}
+          source={require("../../assets/anim/sunny.json")}
+        />
+      </View>
+
+      {/* temp */}
+      <View
+        style={{
+          left: 0,
+          bottom: 0,
+          flexDirection: "row",
+        }}
+      >
+        <Text style={styles.tempText}>
+          {weatherForecast.current.feelslike_c}
+        </Text>
+        <Text style={{ marginTop: 6, fontSize: 18, fontFamily: "MaiandraSD" }}>
+          °C
         </Text>
       </View>
     </View>
@@ -89,4 +129,12 @@ const Home = () => {
 
 export default Home;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  tempText: {
+    fontSize: 60,
+    fontWeight: "normal",
+    fontFamily: "GlacialIndifference",
+    marginLeft: 10,
+    marginBottom: 12,
+  },
+});
