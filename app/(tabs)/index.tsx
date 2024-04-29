@@ -1,10 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useEffect, useState } from "react";
 import { colors, fontSize } from "../../constants/token";
-import { useRoute, RouteProp } from "@react-navigation/native";
-import { RootStackParamList } from "../../types/types";
+import { WeatherData } from "../../types/types";
+import { useContext } from "react";
+import { WeatherContext } from "../../store/context/weather-context";
 
-type HomeScreenRouteProp = RouteProp<RootStackParamList, "locationData">;
 const months = [
   "Jan",
   "Feb",
@@ -30,8 +29,12 @@ const days = [
 ];
 
 const Home = () => {
-  const route = useRoute<HomeScreenRouteProp>();
-  const [fulldate, time] = route.params?.location?.localtime.split(" ");
+  const weatherDataCtx = useContext(WeatherContext);
+
+  const weatherForecast: WeatherData =
+    weatherDataCtx?.locationData as WeatherData;
+
+  const [fulldate, time] = weatherForecast.location.localtime.split("");
 
   const d = new Date(fulldate);
   let day = days[d.getDay()];
@@ -54,30 +57,24 @@ const Home = () => {
         }}
       >
         <View style={{ flexDirection: "column" }}>
-          <Text
-            style={{ fontFamily: "GlacialIndifference" }}
-          >{`${day}, ${date} ${month}`}</Text>
+          <Text>{`${day}, ${date} ${month}`}</Text>
           <Text
             style={{
               fontSize: 32,
               color: colors.background_dark,
-              fontFamily: "Maiandra",
             }}
           >
-            {route.params?.location.name}
+            {weatherForecast.location.name}
           </Text>
-          <Text style={{ fontFamily: "GlacialIndifference" }}>
-            {route.params?.location.country}
-          </Text>
+          <Text>{weatherForecast.location.country}</Text>
         </View>
         <Text
           style={{
             transform: [{ rotate: "90deg" }],
             fontSize: 30,
-            fontFamily: "Maiandra",
           }}
         >
-          {route.params?.current.condition.text}
+          {weatherForecast.current.condition.text}
         </Text>
       </View>
     </View>
