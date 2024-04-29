@@ -10,10 +10,11 @@ import { ParamListBase, TabNavigationState } from "@react-navigation/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { colors } from "../../constants/token";
 import Header from "../../components/Header";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import useDebounce from "../../hooks/useDebounce";
 import { useContext } from "react";
 import { WeatherContext } from "../../store/context/weather-context";
+import { Locations } from "../../types/types";
 
 const { Navigator } = createMaterialTopTabNavigator();
 
@@ -25,16 +26,6 @@ export const MaterialTopTabs = withLayoutContext<
 >(Navigator);
 
 const API_KEY = "e33fc6720622469691d42100242804";
-
-export interface Locations {
-  id: number;
-  name: string;
-  region: string;
-  country: string;
-  lat: number;
-  lon: number;
-  url: string;
-}
 
 const Layout = () => {
   const [locations, setLocations] = useState<Locations[]>([]);

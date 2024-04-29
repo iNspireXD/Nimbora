@@ -1,6 +1,12 @@
-export type RootStackParamList = {
-  locationData: WeatherData;
-};
+export interface Locations {
+  id: number;
+  name: string;
+  region: string;
+  country: string;
+  lat: number;
+  lon: number;
+  url: string;
+}
 
 export interface WeatherData {
   current: CurrentWeather;

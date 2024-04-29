@@ -57,21 +57,27 @@ const Home = () => {
         }}
       >
         <View style={{ flexDirection: "column" }}>
-          <Text>{`${day}, ${date} ${month}`}</Text>
+          <Text
+            style={{ fontFamily: "GlacialIndifference" }}
+          >{`${day}, ${date} ${month}`}</Text>
           <Text
             style={{
               fontSize: 32,
               color: colors.background_dark,
+              fontFamily: "Maiandra",
             }}
           >
             {weatherForecast.location.name}
           </Text>
-          <Text>{weatherForecast.location.country}</Text>
+          <Text style={{ fontFamily: "GlacialIndifference" }}>
+            {weatherForecast.location.country}
+          </Text>
         </View>
         <Text
           style={{
             transform: [{ rotate: "90deg" }],
             fontSize: 30,
+            fontFamily: "Maiandra",
           }}
         >
           {weatherForecast.current.condition.text}
