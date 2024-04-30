@@ -40,6 +40,9 @@ const SixDays = (props: Props) => {
               temp={item?.day.avgtemp_c}
               dateTime={item?.date}
               iconUri={item?.day.condition.icon}
+              wind={item?.day.maxwind_kph}
+              humidity={item.day.avghumidity}
+              precipitation={item.day.totalprecip_mm}
             />
           )}
         />

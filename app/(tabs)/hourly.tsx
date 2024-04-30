@@ -41,6 +41,9 @@ const Hourly = (props: Props) => {
               temp={item.feelslike_c}
               dateTime={item.time}
               iconUri={item.condition.icon}
+              wind={item.wind_kph}
+              humidity={item.humidity}
+              precipitation={item.precip_mm}
             />
           )}
         />
