@@ -5,6 +5,7 @@ import {
   Dimensions,
   ScrollView,
   ActivityIndicator,
+  Image,
 } from "react-native";
 import { colors, fontSize } from "../../constants/token";
 import { WeatherData } from "../../types/types";
@@ -76,6 +77,7 @@ const Home = () => {
         <ActivityIndicator size="large" />
       ) : (
         <>
+          {/* locatoin details */}
           <View
             style={{
               flexDirection: "row",
@@ -103,6 +105,7 @@ const Home = () => {
             </View>
           </View>
 
+          {/* weather condition */}
           <View
             style={{
               flex: 1,
@@ -117,7 +120,8 @@ const Home = () => {
                 height: width * 0.95,
               }}
               source={
-                weatherForecast?.current?.condition.text
+                weatherForecast?.current?.condition.text &&
+                weatherForecast.current.condition.text in weatherIcons
                   ? weatherIcons[
                       weatherForecast.current.condition
                         .text as keyof typeof weatherIcons
@@ -129,27 +133,82 @@ const Home = () => {
               style={{
                 fontSize: 30,
                 fontFamily: "MaiandraSD",
+                color: colors.background_dark,
               }}
             >
               {weatherForecast?.current?.condition.text}
             </Text>
           </View>
 
+          {/* wether details */}
           <View
             style={{
               left: 0,
               bottom: 0,
               flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: 10,
             }}
           >
-            <Text style={styles.tempText}>
-              {weatherForecast.current?.feelslike_c}
-            </Text>
-            <Text
-              style={{ marginTop: 6, fontSize: 18, fontFamily: "MaiandraSD" }}
-            >
-              °C
-            </Text>
+            <View style={{ flexDirection: "row" }}>
+              <Text style={styles.tempText}>
+                {weatherForecast.current?.feelslike_c}
+              </Text>
+              <Text
+                style={{ marginTop: 6, fontSize: 18, fontFamily: "MaiandraSD" }}
+              >
+                °C
+              </Text>
+            </View>
+            {/* wind,percipation ets */}
+            <View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginVertical: 6,
+                  backgroundColor: colors.primary_gray,
+                  padding: 4,
+                  borderRadius: 8,
+                }}
+              >
+                <Image
+                  style={{
+                    width: 25,
+                    height: 25,
+                    resizeMode: "contain",
+                    marginHorizontal: 4,
+                  }}
+                  source={require("../../assets/icons/wind.png")}
+                />
+                <Text
+                  style={styles.otherDetailsText}
+                >{`${weatherForecast.current?.gust_kph} kph`}</Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  backgroundColor: colors.primary_blue,
+                  padding: 4,
+                  borderRadius: 8,
+                }}
+              >
+                <Image
+                  style={{
+                    width: 25,
+                    height: 25,
+                    resizeMode: "contain",
+                    marginHorizontal: 4,
+                  }}
+                  source={require("../../assets/icons/drop.png")}
+                />
+                <Text
+                  style={styles.otherDetailsText}
+                >{`${weatherForecast.current?.humidity}%`}</Text>
+              </View>
+            </View>
           </View>
         </>
       )}
@@ -165,6 +224,12 @@ const styles = StyleSheet.create({
     fontWeight: "normal",
     fontFamily: "GlacialIndifference",
     marginLeft: 10,
+    color: colors.background_dark,
     marginBottom: 24,
+  },
+  otherDetailsText: {
+    fontFamily: "GlacialIndifference",
+    fontSize: fontSize.xs,
+    color: colors.background_dark,
   },
 });
