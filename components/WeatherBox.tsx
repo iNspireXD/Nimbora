@@ -3,24 +3,30 @@ import React from "react";
 import { colors, fontSize } from "../constants/token";
 
 type Props = {
-  temp: string;
+  temp: number;
   dateTime: string;
   iconUri: string;
 };
 
-const WeatherBox = (props: Props) => {
+const WeatherBox = ({ temp, dateTime, iconUri }: Props) => {
   return (
     <TouchableOpacity style={styles.container}>
       <View style={styles.innerContainer}>
         {/* temp details and time view */}
         <View>
-          <Text style={styles.tempText}>20^C</Text>
-          <Text style={styles.dateText}>2024-04-28 00:00</Text>
+          <Text style={styles.tempText}>{`${temp}°C`}</Text>
+          <Text style={styles.dateText}>{dateTime}</Text>
         </View>
         <View>
           <Image
             style={styles.weatherIconImage}
-            source={require("../assets/icons/sun.png")}
+            source={
+              iconUri
+                ? { uri: `https:${iconUri}` }
+                : {
+                    uri: "https//cdn.weatherapi.com/weather/64x64/night/113.png",
+                  }
+            }
           />
         </View>
       </View>
@@ -33,9 +39,10 @@ export default WeatherBox;
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    backgroundColor: colors.primary_red,
+    backgroundColor: colors.background_dark_blue,
     padding: 8,
     borderRadius: 8,
+    marginBottom: 5,
   },
   innerContainer: {
     flexDirection: "row",
