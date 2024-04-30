@@ -89,17 +89,23 @@ const Layout = () => {
       <View style={styles.container}>
         <MaterialTopTabs
           screenOptions={{
-            tabBarStyle: { backgroundColor: colors.background_cream },
             tabBarIndicatorStyle: {
               backgroundColor: "gray",
               height: 1,
             },
+            tabBarStyle: { backgroundColor: colors.background_cream },
           }}
         >
           <MaterialTopTabs.Screen
             name="index"
             options={{
               title: "Today",
+            }}
+          />
+          <MaterialTopTabs.Screen
+            name="hourly"
+            options={{
+              title: "Hourly",
             }}
           />
         </MaterialTopTabs>
