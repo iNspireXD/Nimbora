@@ -137,3 +137,45 @@ export type HourlyData = {
     windchill_f: number;
   }[];
 };
+
+interface Astro {
+  is_moon_up: number;
+  is_sun_up: number;
+  moon_illumination: number;
+  moon_phase: string;
+  moonrise: string;
+  moonset: string;
+  sunrise: string;
+  sunset: string;
+}
+
+interface Day {
+  avghumidity: number;
+  avgtemp_c: number;
+  avgtemp_f: number;
+  avgvis_km: number;
+  avgvis_miles: number;
+  condition: any; // You may want to define this interface further based on the actual structure of the condition object
+  daily_chance_of_rain: number;
+  daily_chance_of_snow: number;
+  daily_will_it_rain: number;
+  daily_will_it_snow: number;
+  maxtemp_c: number;
+  maxtemp_f: number;
+  maxwind_kph: number;
+  maxwind_mph: number;
+  mintemp_c: number;
+  mintemp_f: number;
+  totalprecip_in: number;
+  totalprecip_mm: number;
+  totalsnow_cm: number;
+  uv: number;
+}
+
+export interface DailyWeatheData {
+  astro: Astro;
+  date: string;
+  date_epoch: number;
+  day: Day;
+  hour: HourlyData[];
+}

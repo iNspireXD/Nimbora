@@ -49,7 +49,7 @@ const Layout = () => {
         weatherDataCtx?.setLocationData([]);
         try {
           const forecastData = await fetch(
-            `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${searchLocationName}&days=2&aqi=no&alerts=no`
+            `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${searchLocationName}&days=7&aqi=no&alerts=no`
           ).then((res) => res.json());
           weatherDataCtx?.setLocationData(forecastData);
         } catch (error) {
