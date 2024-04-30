@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   Image,
   Pressable,
   StyleSheet,
@@ -24,19 +25,26 @@ const Hourly = (props: Props) => {
     ?.forecastday[0] as HourlyData;
 
   return (
-    <View style={styles.mainContainer}>
-      <FlashList
-        data={hourlyDetails?.hour}
-        keyExtractor={(item, index) => index.toString()}
-        estimatedItemSize={50}
-        renderItem={({ item }) => (
-          <WeatherBox
-            temp={item.feelslike_c}
-            dateTime={item.time}
-            iconUri={item.condition.icon}
-          />
-        )}
-      />
+    <View
+      style={weatherDataCtx.fetching ? styles.loading : styles.mainContainer}
+    >
+      {weatherDataCtx.fetching ? (
+        <ActivityIndicator size="large" />
+      ) : (
+        <FlashList
+          data={hourlyDetails?.hour}
+          keyExtractor={(item, index) => index.toString()}
+          estimatedItemSize={50}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <WeatherBox
+              temp={item.feelslike_c}
+              dateTime={item.time}
+              iconUri={item.condition.icon}
+            />
+          )}
+        />
+      )}
     </View>
   );
 };
@@ -48,5 +56,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background_cream,
     padding: 12,
+  },
+  loading: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: colors.background_cream,
   },
 });

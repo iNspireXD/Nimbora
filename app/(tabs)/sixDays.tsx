@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   Image,
   Pressable,
   StyleSheet,
@@ -23,19 +24,26 @@ const SixDays = (props: Props) => {
   const nextSixDaysForecast: DailyWeatheData[] = weatherForecast.forecast
     ?.forecastday as DailyWeatheData[];
   return (
-    <View style={styles.mainContainer}>
-      <FlashList
-        data={nextSixDaysForecast}
-        keyExtractor={(item, index) => index.toString()}
-        estimatedItemSize={10}
-        renderItem={({ item }) => (
-          <WeatherBox
-            temp={item?.day.avgtemp_c}
-            dateTime={item?.date}
-            iconUri={item?.day.condition.icon}
-          />
-        )}
-      />
+    <View
+      style={weatherDataCtx.fetching ? styles.loading : styles.mainContainer}
+    >
+      {weatherDataCtx.fetching ? (
+        <ActivityIndicator size="large" />
+      ) : (
+        <FlashList
+          data={nextSixDaysForecast}
+          keyExtractor={(item, index) => index.toString()}
+          estimatedItemSize={10}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <WeatherBox
+              temp={item?.day.avgtemp_c}
+              dateTime={item?.date}
+              iconUri={item?.day.condition.icon}
+            />
+          )}
+        />
+      )}
     </View>
   );
 };
@@ -47,5 +55,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background_cream,
     padding: 12,
+  },
+  loading: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: colors.background_cream,
   },
 });
