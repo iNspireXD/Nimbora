@@ -9,9 +9,6 @@ const Layout = () => {
     GlacialIndifference: require("../assets/fonts/GlacialIndifference.otf"),
     MaiandraSD: require("../assets/fonts/Maiandra.otf"),
   });
-  if (!fontsLoaded) {
-    return <ActivityIndicator />;
-  }
   return (
     <WeatherContexProvider>
       <Stack screenOptions={{ headerShown: false }}>

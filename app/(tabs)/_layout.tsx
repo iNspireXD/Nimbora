@@ -49,10 +49,12 @@ const Layout = () => {
 
   useEffect(() => {
     const fetchStoredLocationName = async () => {
+      setLoading(true);
       const storedLocationName = await getLocationName();
       if (storedLocationName !== null) {
         setSearchLocationName(storedLocationName);
       }
+      setLoading(false);
     };
 
     fetchStoredLocationName();
@@ -81,13 +83,13 @@ const Layout = () => {
   useEffect(() => {
     async function fetchData() {
       if (debouncedSearch !== "") {
-        setLoading(true);
+        // setLoading(true);
         setLocations([]);
         const data = await fetch(
           `https://api.weatherapi.com/v1/search.json?key=${API_KEY}&q=${debouncedSearch}`
         ).then((res) => res.json());
         setLocations(data);
-        setLoading(false);
+        // setLoading(false);
       } else setLocations([]);
     }
     fetchData();
@@ -102,6 +104,7 @@ const Layout = () => {
         setLocations={setLocations}
         submitLocation={locationSubmitHandler}
       />
+
       <View style={styles.container}>
         <MaterialTopTabs
           screenOptions={{
