@@ -6,8 +6,6 @@ import {
   ScrollView,
   ActivityIndicator,
   Image,
-  KeyboardAvoidingView,
-  Platform,
 } from "react-native";
 import { colors, fontSize } from "../../constants/token";
 import { WeatherData } from "../../types/types";

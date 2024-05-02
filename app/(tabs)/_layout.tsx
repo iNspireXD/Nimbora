@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
 
 import {
   createMaterialTopTabNavigator,
@@ -15,6 +15,10 @@ import useDebounce from "../../hooks/useDebounce";
 import { useContext } from "react";
 import { WeatherContext } from "../../store/context/weather-context";
 import { Locations } from "../../types/types";
+import {
+  getLocationName,
+  storeLocationName,
+} from "../../store/context/storage";
 
 const { Navigator } = createMaterialTopTabNavigator();
 
@@ -31,16 +35,28 @@ const Layout = () => {
   const [locations, setLocations] = useState<Locations[]>([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
-  const [searchLocationName, setSearchLocationName] = useState("New Zealand");
+  const [searchLocationName, setSearchLocationName] = useState("");
 
   const debouncedSearch = useDebounce(search, 500);
 
   const locationSubmitHandler = (cityName: string): void => {
     setSearch("");
     setSearchLocationName(cityName);
+    storeLocationName(cityName);
   };
 
   const weatherDataCtx = useContext(WeatherContext);
+
+  useEffect(() => {
+    const fetchStoredLocationName = async () => {
+      const storedLocationName = await getLocationName();
+      if (storedLocationName !== null) {
+        setSearchLocationName(storedLocationName);
+      }
+    };
+
+    fetchStoredLocationName();
+  }, []);
 
   useEffect(() => {
     async function fetchForecastData() {
