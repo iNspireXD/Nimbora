@@ -13,17 +13,21 @@ This is a React Native app built using Expo that fetches and displays weather fo
 
 ## Screenshots
 
-[![home.jpg](https://i.postimg.cc/Jhw3DYcn/home.jpg)](https://postimg.cc/9Dpwspk5)
 _Today's weather condition_
 
-[![search.jpg](https://i.postimg.cc/9fGdGPJB/search.jpg)](https://postimg.cc/v1ZxynR1)
+[![home.jpg](https://i.postimg.cc/Jhw3DYcn/home.jpg)](https://postimg.cc/9Dpwspk5)
+
 _Search for cities by name_
 
-[![hourly.jpg](https://i.postimg.cc/ZRH6QbkB/hourly.jpg)](https://postimg.cc/vg11gdZb)
+[![search.jpg](https://i.postimg.cc/9fGdGPJB/search.jpg)](https://postimg.cc/v1ZxynR1)
+
 _Hourly forecast for the selected city_
 
-[![daily.jpg](https://i.postimg.cc/G2dkzBfn/daily.jpg)](https://postimg.cc/TyNL3PGt)
+[![hourly.jpg](https://i.postimg.cc/ZRH6QbkB/hourly.jpg)](https://postimg.cc/vg11gdZb)
+
 _6-day weather forecast_
+
+[![daily.jpg](https://i.postimg.cc/G2dkzBfn/daily.jpg)](https://postimg.cc/TyNL3PGt)
 
 ## Getting Started
 
