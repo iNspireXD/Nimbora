@@ -1,6 +1,6 @@
 # Weather App
 
-[![tinywow-tinywow-file-54798205-54798674.gif](https://i.postimg.cc/fbBLnJLN/tinywow-tinywow-file-54798205-54798674.gif)](https://postimg.cc/d7ZvGQrH)
+[![app.gif](https://i.postimg.cc/fbBLnJLN/app.gif)]
 
 This is a React Native app built using Expo that fetches and displays weather forecast data for different cities. It utilizes the async storage to store local data on the device, and Bun is used as the package manager as well as lottie library to render After Effects animations.
 
