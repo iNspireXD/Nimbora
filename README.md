@@ -1,4 +1,4 @@
-# Weather App
+# Nimbora: Forecasts Powered by Expo & Lottie animations.
 
 [![weather-app1.gif](https://i.postimg.cc/4yCJyN1m/weather-app1.gif)](https://postimg.cc/7GVvQ4dk)
 
